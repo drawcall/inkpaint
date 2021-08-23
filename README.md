@@ -4,6 +4,16 @@
   <img src="./examples/img/logo.png" />
 </p>
 
+<div align="center">
+<a href="https://www.npmjs.com/inkpaint" target="_blank"><img src="https://img.shields.io/npm/v/inkpaint.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/inkpaint" target="_blank"><img src="https://img.shields.io/npm/l/inkpaint.svg" alt="Package License" /></a>
+<a href="https://github.com/prettier/prettier" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg" alt="Code Style"></a>
+<a href="https://github.com/tnfe/inkpaint/pulls" target="_blank"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs"/></a>
+<a href="https://nodejs.org" target="_blank"><img src="https://img.shields.io/badge/node-%3E%3D%208.0.0-brightgreen.svg" alt="Node Version" /></a>
+</div>
+
+## Overview
+
 InkPaint is a lightweight node.js canvas graphics animation library. It forks from the famous canvas engine pixi.js. You can use it to do server-side image synthesis.
 
 InkPaint has a lot of performance optimization and code refactoring. One of its application Demo is FFCreator [https://github.com/tnfe/FFCreator](https://github.com/tnfe/FFCreator) video processing library.

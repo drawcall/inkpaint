@@ -39,29 +39,34 @@ npm install inkpaint
 
 ```js
 const fs = require("fs-extra");
-const { Application, Sprite, Ticker, loader } = require("inkpaint");
+const { Application, Sprite, Ticker, Loader } = require("inkpaint");
 
-const app = new Application();
-loader.add("bunny", "bunny.png").load(loaded);
+const width = 800;
+const height = 600;
+
+const app = new Application(width, height);
+const loader = new InkPaint.Loader();
+loader.add("boy", "./assets/boy.png");
+loader.load(loaded);
 
 function loaded(loader, resources) {
-  const bunny = new Sprite(resources.bunny.texture);
-  bunny.x = app.renderer.width / 2;
-  bunny.y = app.renderer.height / 2;
-  bunny.anchor.set(0.5);
-  app.stage.addChild(bunny);
+  const boy = new Sprite(resources.boy.texture);
+  boy.x = width / 2;
+  boy.y = height / 2;
+  boy.anchor.set(0.5);
+  app.stage.addChild(boy);
 }
 
 const ticker = new Ticker();
 ticker.start();
 ticker.add(() => {
-  // The render function must be called in the loop (different from pixi.js)
   app.render();
+  boy.x += 0.1;
 });
 
 // save image
 const buffer = app.view.toBuffer("image/png");
-fs.outputFile("hello.png", buffer);
+fs.outputFile("./hello.png", buffer);
 ```
 
 ## Save Image

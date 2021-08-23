@@ -75,7 +75,7 @@ InkPaint supports saving pictures in multiple formats, you can refer to the api 
 
 ## Installation
 
-### 1. Install `node-canvas` and `headless-gl` dependencies
+### Install `node-canvas` and `headless-gl` dependencies
 
 > ##### If it is a computer with a display device, such as a personal `pc` computer with `windows`, `Mac OSX` system, or a `server` server with a graphics card or display device, you can skip this step without installing this dependency.
 
@@ -97,13 +97,6 @@ If you are using `Debian`, `ubuntu` system, you can use `apt` to install.
 sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
 sudo apt-get install libgl1-mesa-dev xvfb libxi-dev libx11-dev
 ```
-
-### 2. Because FFCreator depends on `FFmpeg`, you need to install a regular version of `FFmpeg`
-
-- How to Install and Use FFmpeg on CentOS [https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/)
-- How to Install FFmpeg on Debian [https://linuxize.com/post/how-to-install-ffmpeg-on-debian-9/](https://linuxize.com/post/how-to-install-ffmpeg-on-debian-9/)
-
-#### For a more detailed tutorial, please check [here](https://tnfe.github.io/FFCreator/#/guide/installation)
 
 ## Start Up
 

@@ -45,7 +45,7 @@ const width = 800;
 const height = 600;
 
 const app = new Application(width, height);
-const loader = new InkPaint.Loader();
+const loader = new Loader();
 loader.add("boy", "./assets/boy.png");
 loader.load(loaded);
 

@@ -1,0 +1,139 @@
+# InkPaint — canvas graphics rendering library for node.js
+
+<p align="center">
+  <img src="./examples/img/logo.png" />
+</p>
+
+InkPaint is a lightweight node.js canvas graphics animation library. It forks from the famous canvas engine pixi.js. You can use it to do server-side image synthesis.
+
+InkPaint has a lot of performance optimization and code refactoring. One of its application Demo is FFCreator [https://github.com/tnfe/FFCreator](https://github.com/tnfe/FFCreator) video processing library.
+
+At the same time, inkpaint is a common library between node.js and the browser, and it can still run normally on the browser side.
+
+## Current features
+
+- WebGL renderer (headless-gl)
+- Canvas renderer (node-canvas)
+- Super easy to use API
+- Support for texture atlases
+- Asset loader / sprite sheet loader
+- Support multiple text effects
+- Various Sprite effects and animations
+- Masking and Filters
+
+## Basic Usage
+
+```sh
+npm install inkpaint
+```
+
+```js
+const fs = require("fs-extra");
+const { Application, Sprite, Ticker, loader } = require("inkpaint");
+
+const app = new Application();
+loader.add("bunny", "bunny.png").load(loaded);
+
+function loaded(loader, resources) {
+  const bunny = new Sprite(resources.bunny.texture);
+  bunny.x = app.renderer.width / 2;
+  bunny.y = app.renderer.height / 2;
+  bunny.anchor.set(0.5);
+  app.stage.addChild(bunny);
+}
+
+const ticker = new Ticker();
+ticker.start();
+ticker.add(() => {
+  // The render function must be called in the loop (different from pixi.js)
+  app.render();
+});
+
+// save image
+const buffer = app.view.toBuffer("image/png");
+fs.outputFile("hello.png", buffer);
+```
+
+## Save Image
+
+InkPaint supports saving pictures in multiple formats, you can refer to the api of node-canvas [https://github.com/Automattic/node-canvas#canvastobuffer](). You can save any animated graphics supported by the browser on the server side.
+
+## Installation
+
+### 1. Install `node-canvas` and `headless-gl` dependencies
+
+> ##### If it is a computer with a display device, such as a personal `pc` computer with `windows`, `Mac OSX` system, or a `server` server with a graphics card or display device, you can skip this step without installing this dependency.
+
+If you are using `Centos`, `Redhat`, `Fedora` system, you can use `yum` to install.
+
+```shell
+sudo yum install gcc-c++ cairo-devel pango-devel libjpeg-turbo-devel giflib-devel
+```
+
+Install[`Xvfb`](https://linux.die.net/man/1/xvfb) and [`Mesa`](http://www.sztemple.cc/articles/linux%E4%B8%8B%E7%9A%84opengl-mesa%E5%92%8Cglx%E7%AE%80%E4%BB%8B)
+
+```shell
+sudo yum install mesa-dri-drivers Xvfb libXi-devel libXinerama-devel libX11-devel
+```
+
+If you are using `Debian`, `ubuntu` system, you can use `apt` to install.
+
+```shell
+sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
+sudo apt-get install libgl1-mesa-dev xvfb libxi-dev libx11-dev
+```
+
+### 2. Because FFCreator depends on `FFmpeg`, you need to install a regular version of `FFmpeg`
+
+- How to Install and Use FFmpeg on CentOS [https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/)
+- How to Install FFmpeg on Debian [https://linuxize.com/post/how-to-install-ffmpeg-on-debian-9/](https://linuxize.com/post/how-to-install-ffmpeg-on-debian-9/)
+
+#### For a more detailed tutorial, please check [here](https://tnfe.github.io/FFCreator/#/guide/installation)
+
+## Start Up
+
+> If it is a computer with a display device, such as a personal pc computer or a server server with a graphics card or display device, start normally `npm start`
+
+#### Otherwise, You must use the `xvfb-run` script command to start the program to use webgl under the Linux server
+
+xvfb-run more detailed command parameters [http://manpages.ubuntu.com/manpages/xenial/man1/xvfb-run.1.html](http://manpages.ubuntu.com/manpages/xenial/man1/xvfb-run.1.html)
+
+```shell
+xvfb-run -s "-ac -screen 0 1280x1024x24" npm start
+```
+
+## How to build
+
+Note that for most users you don't need to build this project. If all you want is to use InkPaint, then
+just download one of our [prebuilt releases](https://github.com/tnfe/inkpaint/releases). Really
+the only time you should need to build InkPaint is if you are developing it.
+
+If you don't already have Node.js and NPM, go install them. Then, in the folder where you have cloned
+the repository, install the build dependencies using npm:
+
+```sh
+npm install
+```
+
+Compile the node.js package
+
+```sh
+npm run lib
+```
+
+At the same time, inkpaint is a common library between node.js and the browser, and it can still run normally on the browser side.
+If you want to view the example on the browser side, please execute
+
+```sh
+npm run web
+```
+
+To execute the example under node.js, execute
+
+```sh
+npm run examples
+```
+
+### License
+
+This content is released under the (http://opensource.org/licenses/MIT) MIT License.

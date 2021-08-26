@@ -6,13 +6,17 @@ document.body.appendChild(app.view);
 
 module.exports = app;
 
-var basicText = new InkPaint.Text("Basic周杰伦 text in pixi");
+var basicText = new InkPaint.Text("abcde 没有字体");
 basicText.x = 50;
 basicText.y = 100;
-
+var index = 0;
+var id = setInterval(() => {
+    console.log(basicText.font);
+    if (index++ >= 20) clearInterval(id);
+}, 1000 / 30);
 app.stage.addChild(basicText);
 
-var text = new InkPaint.Text("Basic text周杰伦 in pixi");
+var text = new InkPaint.Text("Basic text周杰伦 in pixi没有字体");
 text.updateStyle({
     fill: "#ffffff",
     backgroundColor: "#ff0000",

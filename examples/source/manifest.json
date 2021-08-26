@@ -9,10 +9,6 @@
             "entry": "transparent-background.js"
         },
         {
-            "title": "Tinting",
-            "entry": "tinting.js"
-        },
-        {
             "title": "BlendModes",
             "entry": "blendmodes.js"
         },
@@ -47,6 +43,20 @@
             "entry": "destroy.js"
         }
     ],
+    "text": [
+        {
+            "title": "Text",
+            "entry": "text.js"
+        },
+        {
+            "title": "FontFamily",
+            "entry": "fontfamily.js"
+        },
+        {
+            "title": "Webfont",
+            "entry": "webfont.js"
+        }
+    ],
     "sprite": [
         {
             "title": "Basic",
@@ -71,16 +81,6 @@
         {
             "title": "Video",
             "entry": "video.js"
-        }
-    ],
-    "text": [
-        {
-            "title": "Text",
-            "entry": "text.js"
-        },
-        {
-            "title": "Webfont",
-            "entry": "webfont.js"
         }
     ],
     "graphics": [

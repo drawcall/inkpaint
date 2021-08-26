@@ -1,18 +1,15 @@
 var app = new InkPaint.Application(800, 600, {
-    // forceCanvas: true,
-    backgroundColor: 0x1099bb
+    backgroundColor: 0x1099bb,
+    preserveDrawingBuffer: true
 });
 document.body.appendChild(app.view);
 
-module.exports = app;
-
-var basicText = new InkPaint.Text("Basic周杰伦 text in pixi");
+var basicText = new InkPaint.Text("Basic text in pixi");
 basicText.x = 50;
 basicText.y = 100;
-
 app.stage.addChild(basicText);
 
-var text = new InkPaint.Text("Basic text周杰伦 in pixi");
+var text = new InkPaint.Text("Basic text in pixi");
 text.updateStyle({
     fill: "#ffffff",
     backgroundColor: "#ff0000",
@@ -21,18 +18,6 @@ text.updateStyle({
 text.x = 250;
 text.y = 200;
 app.stage.addChild(text);
-
-var logo = InkPaint.Sprite.fromImage(paths("source/assets/logo/logo2.png"));
-logo.x = 400;
-logo.y = 50;
-logo.anchor.set(0.5);
-logo.scale.set(0.5);
-app.stage.addChild(logo);
-
-var bunny = InkPaint.Sprite.fromImage(paths("source/assets/eggHead.png"));
-bunny.x = 500;
-bunny.y = 400;
-app.stage.addChild(bunny);
 
 var text = new InkPaint.Text("你好周杰伦! 哈哈");
 text.updateStyle({
@@ -43,6 +28,11 @@ text.updateStyle({
 text.x = 450;
 text.y = 300;
 app.stage.addChild(text);
+
+var bunny = InkPaint.Sprite.fromImage("source/assets/eggHead.png");
+bunny.x = 500;
+bunny.y = 400;
+app.stage.addChild(bunny);
 
 var style = new InkPaint.TextStyle({
     fontFamily: "Arial",
@@ -58,7 +48,7 @@ var style = new InkPaint.TextStyle({
     dropShadowAngle: Math.PI / 6,
     dropShadowDistance: 6,
     wordWrap: true,
-    wordWrapWidth: 420
+    wordWrapWidth: 440
 });
 
 var richText = new InkPaint.Text(
@@ -66,7 +56,12 @@ var richText = new InkPaint.Text(
     style
 );
 richText.x = 50;
-richText.y = 250;
+richText.y = 350;
 
 app.stage.addChild(richText);
-app.render();
+
+var ticker = new InkPaint.Ticker();
+ticker.start();
+ticker.add(function() {
+    app.render();
+});

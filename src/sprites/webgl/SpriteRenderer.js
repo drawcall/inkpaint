@@ -377,6 +377,7 @@ export default class SpriteRenderer extends ObjectRenderer {
       uint32View[index + 7] = uvs[1];
       uint32View[index + 12] = uvs[2];
       uint32View[index + 17] = uvs[3];
+
       /* eslint-disable max-len */
       const alpha = Math.min(sprite.worldAlpha, 1.0);
       // we dont call extra function if alpha is 1.0, that's faster

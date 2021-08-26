@@ -380,7 +380,7 @@ export default class TextStyle {
 
     return `${this.fontStyle} ${this.fontVariant} ${
       this.fontWeight
-    } ${fontSizeString} ${fontFamilies.join(",")}`;
+    } ${fontSizeString}/${fontSizeString} ${fontFamilies.join(",")}`;
   }
 }
 

@@ -437,6 +437,10 @@ export default class Text extends Sprite {
     this._height = value;
   }
 
+  get font() {
+    return this._font;
+  }
+
   get style() {
     return this._style;
   }

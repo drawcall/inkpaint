@@ -6,78 +6,29 @@ const FRONT_FACE = 2;
 const CULL_FACE = 3;
 const BLEND_FUNC = 4;
 
-/**
- * A WebGL state machines
- *
- * @memberof InkPaint
- * @class
- */
 export default class WebGLState {
-  /**
-   * @param {WebGLRenderingContext} gl - The current WebGL rendering context
-   */
   constructor(gl) {
-    /**
-     * The current active state
-     *
-     * @member {Uint8Array}
-     */
     this.activeState = new Uint8Array(16);
-
-    /**
-     * The default state
-     *
-     * @member {Uint8Array}
-     */
     this.defaultState = new Uint8Array(16);
-
-    // default blend mode..
     this.defaultState[0] = 1;
-
-    /**
-     * The current state index in the stack
-     *
-     * @member {number}
-     * @private
-     */
     this.stackIndex = 0;
-
-    /**
-     * The stack holding all the different states
-     *
-     * @member {Array<*>}
-     * @private
-     */
     this.stack = [];
-
-    /**
-     * The current WebGL rendering context
-     *
-     * @member {WebGLRenderingContext}
-     */
     this.gl = gl;
 
     this.maxAttribs = gl.getParameter(gl.MAX_VERTEX_ATTRIBS);
-
     this.attribState = {
       tempAttribState: new Array(this.maxAttribs),
       attribState: new Array(this.maxAttribs)
     };
 
     this.blendModes = mapWebGLBlendModesToPixi(gl);
-
-    // check we have vao..
     this.nativeVaoExtension =
       gl.getExtension("OES_vertex_array_object") ||
       gl.getExtension("MOZ_OES_vertex_array_object") ||
       gl.getExtension("WEBKIT_OES_vertex_array_object");
   }
 
-  /**
-   * Pushes a new active state
-   */
   push() {
-    // next state..
     let state = this.stack[this.stackIndex];
 
     if (!state) {
@@ -85,28 +36,16 @@ export default class WebGLState {
     }
 
     ++this.stackIndex;
-
-    // copy state..
-    // set active state so we can force overrides of gl state
     for (let i = 0; i < this.activeState.length; i++) {
       state[i] = this.activeState[i];
     }
   }
 
-  /**
-   * Pops a state out
-   */
   pop() {
     const state = this.stack[--this.stackIndex];
-
     this.setState(state);
   }
 
-  /**
-   * Sets the current state
-   *
-   * @param {*} state - The state to set.
-   */
   setState(state) {
     this.setBlend(state[BLEND]);
     this.setDepthTest(state[DEPTH_TEST]);
@@ -115,14 +54,8 @@ export default class WebGLState {
     this.setBlendMode(state[BLEND_FUNC]);
   }
 
-  /**
-   * Enables or disabled blending.
-   *
-   * @param {boolean} value - Turn on or off webgl blending.
-   */
   setBlend(value) {
     value = value ? 1 : 0;
-
     if (this.activeState[BLEND] === value) {
       return;
     }
@@ -131,11 +64,6 @@ export default class WebGLState {
     this.gl[value ? "enable" : "disable"](this.gl.BLEND);
   }
 
-  /**
-   * Sets the blend mode.
-   *
-   * @param {number} value - The blend mode to set to.
-   */
   setBlendMode(value) {
     if (value === this.activeState[BLEND_FUNC]) {
       return;
@@ -152,11 +80,6 @@ export default class WebGLState {
     }
   }
 
-  /**
-   * Sets whether to enable or disable depth test.
-   *
-   * @param {boolean} value - Turn on or off webgl depth testing.
-   */
   setDepthTest(value) {
     value = value ? 1 : 0;
 
@@ -168,11 +91,6 @@ export default class WebGLState {
     this.gl[value ? "enable" : "disable"](this.gl.DEPTH_TEST);
   }
 
-  /**
-   * Sets whether to enable or disable cull face.
-   *
-   * @param {boolean} value - Turn on or off webgl cull face.
-   */
   setCullFace(value) {
     value = value ? 1 : 0;
 
@@ -184,11 +102,6 @@ export default class WebGLState {
     this.gl[value ? "enable" : "disable"](this.gl.CULL_FACE);
   }
 
-  /**
-   * Sets the gl front face.
-   *
-   * @param {boolean} value - true is clockwise and false is counter-clockwise
-   */
   setFrontFace(value) {
     value = value ? 1 : 0;
 
@@ -200,10 +113,6 @@ export default class WebGLState {
     this.gl.frontFace(this.gl[value ? "CW" : "CCW"]);
   }
 
-  /**
-   * Disables all the vaos in use
-   *
-   */
   resetAttributes() {
     for (let i = 0; i < this.attribState.tempAttribState.length; i++) {
       this.attribState.tempAttribState[i] = 0;
@@ -219,10 +128,6 @@ export default class WebGLState {
     }
   }
 
-  // used
-  /**
-   * Resets all the logic and disables the vaos
-   */
   resetToDefault() {
     // unbind any VAO if they exist..
     if (this.nativeVaoExtension) {

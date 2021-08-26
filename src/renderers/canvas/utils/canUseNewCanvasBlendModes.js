@@ -1,3 +1,3 @@
 export default function canUseNewCanvasBlendModes() {
-    return true;
+  return true;
 }

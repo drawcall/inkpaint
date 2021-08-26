@@ -11,7 +11,7 @@ export default class Application {
         {
           width: options,
           height: arg2 || settings.RENDER_OPTIONS.height,
-          forceCanvas: !!arg4,
+          useGL: !!arg4,
           sharedTicker: !!arg5
         },
         arg3
@@ -22,7 +22,7 @@ export default class Application {
       {
         autoStart: true,
         sharedTicker: false,
-        forceCanvas: false,
+        useGL: false,
         sharedLoader: false,
         autoRender: false
       },

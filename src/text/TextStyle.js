@@ -13,7 +13,7 @@ const defaultStyle = {
   fill: "black",
   fillGradientType: TEXT_GRADIENT.LINEAR_VERTICAL,
   fillGradientStops: [],
-  fontFamily: "Arial",
+  fontFamily: ["Helvetica", "Arial", "sans-serif"], //
   fontSize: 26,
   fontStyle: "normal",
   fontVariant: "normal",

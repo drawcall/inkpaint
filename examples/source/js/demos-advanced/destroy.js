@@ -45,7 +45,8 @@ function addBtn() {
 function init() {
     loader = new InkPaint.Loader();
     app = new InkPaint.Application(800, 600, {
-        backgroundColor: 0x3333bb
+        backgroundColor: 0x3333bb,
+        forceCanvas: true
     });
     con[0].appendChild(app.view);
 
@@ -142,8 +143,8 @@ function init() {
         id = setInterval(() => {
             //////////////////////////////////////////////////////
             if (++i > 3) i = 1;
-            sprite4.texture.updateSource(`source/assets/flowerTop${i}.png`);
-            sprite3.texture.updateSource(
+            sprite4.updateBaseTexture(`source/assets/flowerTop${i}.png`);
+            sprite3.updateBaseTexture(
                 `source/assets/flowerTop${3 - i}.png`,
                 true
             );

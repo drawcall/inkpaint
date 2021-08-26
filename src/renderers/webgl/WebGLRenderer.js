@@ -58,9 +58,7 @@ export default class WebGLRenderer extends SystemRenderer {
     this.filterManager = null;
 
     this.initPlugins();
-    // initialize the context so it is ready for the managers.
     if (this.options.context) {
-      // checks to see if a context is valid..
       validateContext(this.options.context);
     }
 
@@ -99,7 +97,6 @@ export default class WebGLRenderer extends SystemRenderer {
     this.textureManager = new TextureManager(this);
     this.filterManager = new FilterManager(this);
     this.textureGC = new TextureGarbageCollector(this);
-
     this.state.resetToDefault();
 
     this.rootRenderTarget = new RenderTarget(

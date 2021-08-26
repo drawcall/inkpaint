@@ -96,11 +96,6 @@ export default class CanvasRenderer extends SystemRenderer {
     this.emit("postrender");
   }
 
-  /**
-   * Clear the canvas of renderer.
-   *
-   * @param {string} [clearColor] - Clear the canvas with this color, except the canvas is transparent.
-   */
   clear(clearColor) {
     const context = this.context;
 
@@ -114,11 +109,6 @@ export default class CanvasRenderer extends SystemRenderer {
     }
   }
 
-  /**
-   * Sets the blend mode of the renderer.
-   *
-   * @param {number} blendMode - See {@link InkPaint.BLEND_MODES} for valid values.
-   */
   setBlendMode(blendMode) {
     if (this._activeBlendMode === blendMode) {
       return;
@@ -130,34 +120,23 @@ export default class CanvasRenderer extends SystemRenderer {
 
   destroy(removeView) {
     this.destroyPlugins();
-
-    // call the base destroy
     super.destroy(removeView);
 
     this.context = null;
-
     this.refresh = true;
-
     this.maskManager.destroy();
     this.maskManager = null;
-
     this.smoothProperty = null;
   }
 
   resize(screenWidth, screenHeight) {
     super.resize(screenWidth, screenHeight);
-
-    // reset the scale mode.. oddly this seems to be reset when the canvas is resized.
-    // surely a browser bug?? Let PixiJS fix that for you..
     if (this.smoothProperty) {
       this.rootContext[this.smoothProperty] =
         settings.SCALE_MODE === SCALE_MODES.LINEAR;
     }
   }
 
-  /**
-   * Checks if blend mode has changed.
-   */
   invalidateBlendMode() {
     this._activeBlendMode = this.blendModes.indexOf(
       this.context.globalCompositeOperation

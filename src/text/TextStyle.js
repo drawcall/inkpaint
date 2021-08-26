@@ -194,12 +194,6 @@ export default class TextStyle {
     }
   }
 
-  /**
-   * The font style
-   * ('normal', 'italic' or 'oblique')
-   *
-   * @member {string}
-   */
   get fontStyle() {
     return this._fontStyle;
   }
@@ -210,12 +204,6 @@ export default class TextStyle {
     }
   }
 
-  /**
-   * The font variant
-   * ('normal' or 'small-caps')
-   *
-   * @member {string}
-   */
   get fontVariant() {
     return this._fontVariant;
   }
@@ -226,12 +214,6 @@ export default class TextStyle {
     }
   }
 
-  /**
-   * The font weight
-   * ('normal', 'bold', 'bolder', 'lighter' and '100', '200', '300', '400', '500', '600', '700', 800' or '900')
-   *
-   * @member {string}
-   */
   get fontWeight() {
     return this._fontWeight;
   }
@@ -323,11 +305,6 @@ export default class TextStyle {
     }
   }
 
-  /**
-   * The baseline of the text that is rendered.
-   *
-   * @member {string}
-   */
   get textBaseline() {
     return this._textBaseline;
   }
@@ -338,11 +315,6 @@ export default class TextStyle {
     }
   }
 
-  /**
-   * Trim transparent borders
-   *
-   * @member {boolean}
-   */
   get trim() {
     return this._trim;
   }
@@ -373,11 +345,6 @@ export default class TextStyle {
     }
   }
 
-  /**
-   * The width at which text will wrap, it needs wordWrap to be set to true
-   *
-   * @member {number}
-   */
   get wordWrapWidth() {
     return this._wordWrapWidth;
   }
@@ -393,25 +360,21 @@ export default class TextStyle {
     const fontSizeString =
       typeof this.fontSize === "number" ? `${this.fontSize}px` : this.fontSize;
 
-    // Clean-up fontFamily property by quoting each font name
-    // this will support font names with spaces
     let fontFamilies = this.fontFamily;
-
     if (!Array.isArray(this.fontFamily)) {
       fontFamilies = this.fontFamily.split(",");
     }
 
     for (let i = fontFamilies.length - 1; i >= 0; i--) {
-      // Trim any extra white-space
       let fontFamily = fontFamilies[i].trim();
 
-      // Check if font is already escaped in quotes except for CSS generic fonts
-      if (
-        !/([\"\'])[^\'\"]+\1/.test(fontFamily) &&
-        genericFontFamilies.indexOf(fontFamily) < 0
-      ) {
-        fontFamily = `"${fontFamily}"`;
-      }
+      // if (
+      //   !/([\"\'])[^\'\"]+\1/.test(fontFamily) &&
+      //   genericFontFamilies.indexOf(fontFamily) < 0
+      // ) {
+      //   fontFamily = `"${fontFamily}"`;
+      // }
+
       fontFamilies[i] = fontFamily;
     }
 

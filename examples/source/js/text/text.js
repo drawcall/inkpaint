@@ -4,12 +4,12 @@ var app = new InkPaint.Application(800, 600, {
 });
 document.body.appendChild(app.view);
 
-var basicText = new InkPaint.Text("Basic text in pixi");
+var basicText = new InkPaint.Text("Basic 没有字体 text in pixi");
 basicText.x = 50;
 basicText.y = 100;
 app.stage.addChild(basicText);
 
-var text = new InkPaint.Text("Basic text in pixi");
+var text = new InkPaint.Text("Basic text in 没有字体 pixi");
 text.updateStyle({
     fill: "#ffffff",
     backgroundColor: "#ff0000",

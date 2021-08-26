@@ -12,6 +12,7 @@
     "clean": "rimraf dist lib && mkdirp dist && mkdir lib",
     "web": "concurrently \"npm run watch\" \"serve ./\"",
     "examples": "node ./examples",
+    "server-examples": "xvfb-run -s \"-ac -screen 0 1280x1024x24\" npm run examples",
     "watch": "npm run dist -- --watch",
     "watch-lib": "npm run lib -- --watch",
     "watch:lint": "watch \"eslint src test || exit 0\" src",

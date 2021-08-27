@@ -36,7 +36,6 @@ export default class CanvasSpriteRenderer {
     if (texture.valid) {
       renderer.context.globalAlpha = sprite.worldAlpha;
 
-      // If smoothingEnabled is supported and we need to change the smoothing property for sprite texture
       const smoothingEnabled =
         texture.baseTexture.scaleMode === SCALE_MODES.LINEAR;
 
@@ -47,19 +46,22 @@ export default class CanvasSpriteRenderer {
         renderer.context[renderer.smoothProperty] = smoothingEnabled;
       }
 
-      if (texture.trim) {
-        dx =
-          texture.trim.width / 2 +
-          texture.trim.x -
-          sprite.anchor.x * texture.orig.width;
-        dy =
-          texture.trim.height / 2 +
-          texture.trim.y -
-          sprite.anchor.y * texture.orig.height;
-      } else {
-        dx = (0.5 - sprite.anchor.x) * texture.orig.width;
-        dy = (0.5 - sprite.anchor.y) * texture.orig.height;
-      }
+      // if (texture.trim) {
+      //   dx =
+      //     texture.trim.width / 2 +
+      //     texture.trim.x -
+      //     sprite.anchor.x * texture.orig.width;
+      //   dy =
+      //     texture.trim.height / 2 +
+      //     texture.trim.y -
+      //     sprite.anchor.y * texture.orig.height;
+      // } else {
+      //   dx = (0.5 - sprite.anchor.x) * texture.orig.width;
+      //   dy = (0.5 - sprite.anchor.y) * texture.orig.height;
+      // }
+
+      dx = (0.5 - sprite.anchor.x) * texture.orig.width;
+      dy = (0.5 - sprite.anchor.y) * texture.orig.height;
 
       if (texture.rotate) {
         wt.copy(canvasRenderWorldTransform);
@@ -99,45 +101,32 @@ export default class CanvasSpriteRenderer {
 
       const resolution = texture.baseTexture.resolution;
 
-      if (sprite.tint !== 0xffffff) {
-        if (
-          sprite.cachedTint !== sprite.tint ||
-          sprite.tintedTexture.tintId !== sprite._texture._updateID
-        ) {
-          sprite.cachedTint = sprite.tint;
+      this.adaptedNodeCanvas(texture.baseTexture);
 
-          // TODO clean up caching - how to clean up the caches?
-          sprite.tintedTexture = CanvasTinter.getTintedTexture(
-            sprite,
-            sprite.tint
-          );
-        }
+      let sx, sy, dw, dh;
+      sx = texture._frame.x;
+      sy = texture._frame.y;
 
-        renderer.context.drawImage(
-          sprite.tintedTexture,
-          0,
-          0,
-          width * resolution,
-          height * resolution,
-          dx * renderer.resolution,
-          dy * renderer.resolution,
-          width * renderer.resolution,
-          height * renderer.resolution
-        );
+      if (texture.trim) {
+        dw = texture.trim.width;
+        dh = texture.trim.height;
       } else {
-        this.adaptedNodeCanvas(texture.baseTexture);
-        renderer.context.drawImage(
-          texture.baseTexture.source,
-          texture._frame.x * resolution,
-          texture._frame.y * resolution,
-          width * resolution,
-          height * resolution,
-          dx * renderer.resolution,
-          dy * renderer.resolution,
-          width * renderer.resolution,
-          height * renderer.resolution
-        );
+        dw = width;
+        dh = height;
       }
+
+      renderer.context.drawImage(
+        texture.baseTexture.source,
+        sx * resolution,
+        sy * resolution,
+        width * resolution,
+        height * resolution,
+        dx * renderer.resolution,
+        dy * renderer.resolution,
+        dw * renderer.resolution,
+        dh * renderer.resolution
+      );
+      // 0 0 100 100 -50 -50 100 100
     }
   }
 

@@ -37,9 +37,9 @@ function setup(l, resources) {
 
     // Listen for animate update
     var ticker = new InkPaint.Ticker();
-ticker.start();
-ticker.add(function(delta) {
-    app.render();
+    ticker.start();
+    ticker.add(function(delta) {
+        app.render();
         // just for fun, let's rotate mr rabbit a little
         // delta is 1 if running at 100% performance
         // creates frame-independent transformation

@@ -135,6 +135,10 @@
     ],
     "textures": [
         {
+            "title": "Texture",
+            "entry": "texture.js"
+        },
+        {
             "title": "Texture Rotate",
             "entry": "texture-rotate.js"
         },

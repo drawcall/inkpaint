@@ -1,7 +1,5 @@
 var app = new InkPaint.Application(800, 600, {
     backgroundColor: 0x000000,
-    //forceCanvas: true
-    //autoRender: true
 });
 
 document.body.appendChild(app.view);

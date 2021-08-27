@@ -16,9 +16,10 @@ export default class Texture extends EventEmitter {
   constructor(baseTexture, frame, orig, trim, rotate, anchor) {
     super();
 
-    this.noFrame = false;
-    if (!frame) {
-      this.noFrame = true;
+    if (frame) {
+      this.hasDefaultFrame = true;
+    } else {
+      this.hasDefaultFrame = false;
       frame = new Rectangle(0, 0, 1, 1);
     }
 
@@ -56,13 +57,15 @@ export default class Texture extends EventEmitter {
     this.addToCache(baseTexture.imageUrl);
 
     if (baseTexture.hasLoaded) {
-      if (this.noFrame) {
+      if (!this.hasDefaultFrame) {
         // from 1,1 -> w,h
         const { width, height } = baseTexture;
-        frame = new Rectangle(0, 0, width, height);
+        this.frame = new Rectangle(0, 0, width, height);
         baseTexture.on("update", this.onBaseTextureUpdated, this);
+      } else {
+        this.frame = frame;
       }
-      this.frame = frame;
+
       baseTexture.adaptedNodeCanvas();
     } else {
       baseTexture.once("loaded", this.onBaseTextureLoaded, this);
@@ -97,7 +100,7 @@ export default class Texture extends EventEmitter {
   onBaseTextureLoaded(baseTexture) {
     this._updateID++;
 
-    if (this.noFrame) {
+    if (!this.hasDefaultFrame) {
       // from 1,1 -> w,h
       const { width, height } = baseTexture;
       this.frame = new Rectangle(0, 0, width, height);
@@ -116,10 +119,12 @@ export default class Texture extends EventEmitter {
 
   onBaseTextureUpdated(baseTexture) {
     this._updateID++;
-    this._frame.width = baseTexture.width;
-    this._frame.height = baseTexture.height;
-    baseTexture.adaptedNodeCanvas();
+    if (!this.hasDefaultFrame) {
+      this._frame.width = baseTexture.width;
+      this._frame.height = baseTexture.height;
+    }
 
+    baseTexture.adaptedNodeCanvas();
     this.emit("update", this);
   }
 
@@ -137,7 +142,6 @@ export default class Texture extends EventEmitter {
           const urlKey = this._cache[i];
           destroyBaseTextureCache(urlKey);
         }
-
         this.baseTexture.destroy();
       }
 
@@ -183,7 +187,7 @@ export default class Texture extends EventEmitter {
 
   set frame(frame) {
     this._frame = frame;
-    this.noFrame = false;
+    this.hasDefaultFrame = true;
     const { x, y, width, height } = frame;
     const xNotFit = x + width > this.baseTexture.width;
     const yNotFit = y + height > this.baseTexture.height;

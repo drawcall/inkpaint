@@ -216,6 +216,7 @@ export default class Text extends Sprite {
       } else {
         this.context.fillText(current, currentPosition, y);
       }
+
       currentWidth = this.context.measureText(text.substring(index)).width;
       currentPosition += previousWidth - currentWidth + letterSpacing;
       previousWidth = currentWidth;

@@ -5,8 +5,7 @@ loader.add("bunny", paths("source/assets/bunny.png"));
 loader.load(setup);
 
 var app = new InkPaint.Application(800, 600, {
-    backgroundColor: 0x1099bb,
-    forceCanvas: true
+    backgroundColor: 0x1099bb
 });
 var index = 0;
 var now = Date.now();

@@ -45,15 +45,15 @@ function addBtn() {
 function init() {
     loader = new InkPaint.Loader();
     app = new InkPaint.Application(800, 600, {
-        backgroundColor: 0x3333bb,
-        forceCanvas: true
+        backgroundColor: 0x3333bb
+        //useGL: true
     });
     con[0].appendChild(app.view);
 
     loader.add("flowerTop1", "source/assets/flowerTop1.png");
     loader.load(function(loader, resources) {
         texture = resources.flowerTop1.texture;
-        console.log(texture.frame.toString());
+        // console.log(texture.frame.toString());
         loaded();
     });
 
@@ -71,13 +71,13 @@ function init() {
         var frame = new InkPaint.Rectangle(0, 0, 119, 181);
         var orig = new InkPaint.Rectangle(0, 0, width, height);
         var trim = new InkPaint.Rectangle(0, 0, width, height);
-        var result = getSourceRect(width, height);
+        var frame = getSourceRect(width, height);
 
         // 2
         //////////////////////////////////////////////////////
         var texture2 = new InkPaint.Texture(
             texture.baseTexture,
-            result,
+            frame,
             orig,
             trim
         );
@@ -97,7 +97,7 @@ function init() {
         //////////////////////////////////////////////////////
         var width = 60;
         var height = 240;
-        var texture3;
+        var texture4;
         var sprite4 = new InkPaint.Sprite(InkPaint.Texture.newEmpty());
         sprite4.x = 600;
         sprite4.y = 150;
@@ -105,25 +105,24 @@ function init() {
         sprite4.height = height;
         app.stage.addChild(sprite4);
 
-        var orig = new InkPaint.Rectangle(0, 0, width, height);
+        var frame = getSourceRect(width, height);
+        var orig = new InkPaint.Rectangle(0, 0, 119, 181);
         var trim = new InkPaint.Rectangle(0, 0, width, height);
-        var result = getSourceRect(width, height);
+        var trim = frame.clone();
 
         var i = 0;
         var id = setTimeout(() => {
-            if (!texture3) {
-                texture3 = new InkPaint.Texture(
+            if (!texture4) {
+                texture4 = new InkPaint.Texture(
                     new InkPaint.BaseTexture(),
-                    result,
+                    frame,
                     orig,
                     trim
                 );
-                texture3.id = "xxx";
-                sprite4.texture = texture3;
+                texture4.id = "xxx";
+                sprite4.texture = texture4;
                 sprite4.width = width;
                 sprite4.height = height;
-
-                //sprite3.texture = texture.clone();
             }
 
             setSprite3Face();
@@ -149,7 +148,7 @@ function init() {
                 true
             );
             console.log("--------------", sprite3.texture.frame.toString());
-        }, 800);
+        }, 1800);
         ids.push(id);
 
         // Listen for animate update

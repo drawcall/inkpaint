@@ -1,5 +1,5 @@
 var app = new InkPaint.Application(800, 600, {
-    // forceCanvas: true,
+    // useGL: true,
     backgroundColor: 0x1099bb
 });
 document.body.appendChild(app.view);

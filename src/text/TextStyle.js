@@ -368,19 +368,19 @@ export default class TextStyle {
     for (let i = fontFamilies.length - 1; i >= 0; i--) {
       let fontFamily = fontFamilies[i].trim();
 
-      // if (
-      //   !/([\"\'])[^\'\"]+\1/.test(fontFamily) &&
-      //   genericFontFamilies.indexOf(fontFamily) < 0
-      // ) {
-      //   fontFamily = `"${fontFamily}"`;
-      // }
+      if (
+        !/([\"\'])[^\'\"]+\1/.test(fontFamily) &&
+        genericFontFamilies.indexOf(fontFamily) < 0
+      ) {
+        fontFamily = `"${fontFamily}"`;
+      }
 
       fontFamilies[i] = fontFamily;
     }
 
     return `${this.fontStyle} ${this.fontVariant} ${
       this.fontWeight
-    } ${fontSizeString}/${fontSizeString} ${fontFamilies.join(",")}`;
+    } ${fontSizeString} ${fontFamilies.join(",")}`;
   }
 }
 

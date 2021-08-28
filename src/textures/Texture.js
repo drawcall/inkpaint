@@ -84,6 +84,8 @@ export default class Texture extends EventEmitter {
   }
 
   updateSource(imageUrl, useCache = false) {
+    if (this.baseTexture.imageUrl === imageUrl) return;
+
     if (useCache) {
       this.addToCache(imageUrl);
       this.baseTexture = BaseTexture.fromImage(imageUrl);

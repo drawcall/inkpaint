@@ -181,9 +181,14 @@ export default class Text extends Sprite {
     const background = style.background || style.backgroundColor;
     if (!background) return;
 
-    const context = this.context;
-    context.fillStyle = background;
-    context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    const { context, canvas, text } = this;
+    const ftext = String(text).trim();
+    if (ftext) {
+      context.fillStyle = background;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    } else {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    }
   }
 
   drawLetterSpacing(text, x, y, isStroke = false) {
@@ -280,9 +285,7 @@ export default class Text extends Sprite {
 
     // call sprite onTextureUpdate to update scale if _width or _height were set
     this._onTextureUpdate();
-
     baseTexture.emit("update", baseTexture);
-
     this.dirty = false;
   }
 
@@ -414,13 +417,11 @@ export default class Text extends Sprite {
 
   get width() {
     this.updateText(true);
-
     return Math.abs(this.scale.x) * this._texture.orig.width;
   }
 
   set width(value) {
     this.updateText(true);
-
     const s = sign(this.scale.x) || 1;
     this.scale.x = (s * value) / this._texture.orig.width;
     this._width = value;
@@ -468,9 +469,7 @@ export default class Text extends Sprite {
       text === "" || text === null || text === undefined ? " " : text
     );
 
-    if (this._text === text) {
-      return;
-    }
+    if (this._text === text) return;
     this._text = text;
     this.dirty = true;
   }

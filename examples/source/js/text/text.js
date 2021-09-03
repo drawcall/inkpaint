@@ -19,15 +19,15 @@ text.x = 250;
 text.y = 200;
 app.stage.addChild(text);
 
-var text = new InkPaint.Text("你好周杰伦! 哈哈");
-text.updateStyle({
+var text1 = new InkPaint.Text("你好周杰伦! 哈哈");
+text1.updateStyle({
     fill: "#ffffff",
     backgroundColor: "#00eeee",
     padding: 10
 });
-text.x = 450;
-text.y = 300;
-app.stage.addChild(text);
+text1.x = 450;
+text1.y = 300;
+app.stage.addChild(text1);
 
 var bunny = InkPaint.Sprite.fromImage("source/assets/eggHead.png");
 bunny.x = 500;
@@ -60,8 +60,13 @@ richText.y = 350;
 
 app.stage.addChild(richText);
 
+var length = 10;
 var ticker = new InkPaint.Ticker();
 ticker.start();
 ticker.add(function() {
     app.render();
+
+    length -= 0.1;
+    if (length <= -5) length = 10;
+    text1.text = "你好周杰伦! 哈哈".substr(0, Math.max(0, length) >> 0);
 });

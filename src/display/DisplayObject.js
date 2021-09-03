@@ -1,13 +1,13 @@
 import EventEmitter from "eventemitter3";
 import { TRANSFORM_MODE } from "../const";
+import Bounds from "./Bounds";
 import settings from "../settings";
 import Transform from "./Transform";
-import Bounds from "./Bounds";
-import { Rectangle } from "../math";
 import { uuidvx } from "../utils";
+import { Rectangle, Point } from "../math";
+import TransformStatic from "./TransformStatic";
 import FXAAFilter from "../filters/fxaa/FXAAFilter";
 import BlurFilter from "../filters/blur/BlurFilter";
-import TransformStatic from "./TransformStatic";
 
 export default class DisplayObject extends EventEmitter {
   constructor() {
@@ -26,6 +26,7 @@ export default class DisplayObject extends EventEmitter {
     this.parent = null;
     this.worldAlpha = 1;
     this.filterArea = null;
+    this.initScale = new Point(1, 1);
 
     this.filters = null;
     this._enabledFilters = null;
@@ -422,6 +423,7 @@ export default class DisplayObject extends EventEmitter {
     this.fxaa = false;
     this.filters = null;
     this.transform = null;
+    this.initScale = null;
     this.parent = null;
     this._bounds = null;
     this._currentBounds = null;

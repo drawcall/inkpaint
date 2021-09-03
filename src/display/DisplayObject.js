@@ -231,13 +231,16 @@ export default class DisplayObject extends EventEmitter {
   }
 
   attr(attrs) {
+    const scaleInitX = this.initScale.x;
+    const scaleInitY = this.initScale.y;
+
     for (let key in attrs) {
       const val = attrs[key];
 
       switch (key) {
         case "scale":
-          this.scale.x = val;
-          this.scale.y = val;
+          this.scale.x = val * scaleInitX;
+          this.scale.y = val * scaleInitY;
           break;
 
         case "skew":

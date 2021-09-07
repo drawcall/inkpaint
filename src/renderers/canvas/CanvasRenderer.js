@@ -34,7 +34,17 @@ export default class CanvasRenderer extends SystemRenderer {
     this.blendModes = mapCanvasBlendModesToPixi();
     this._activeBlendMode = null;
     this.renderingToScreen = false;
-    this.resize(this.options.width, this.options.height);
+
+    const { width, height, quality, anti } = this.options;
+    this.resize(width, height);
+
+    if (quality) {
+      this.context.quality = quality;
+    }
+
+    if (anti) {
+      this.context.antialias = anti;
+    }
   }
 
   render(displayObject, renderTexture, clear, transform, skipUpdateTransform) {
@@ -65,7 +75,6 @@ export default class CanvasRenderer extends SystemRenderer {
       displayObject.parent = this._tempDisplayObjectParent;
       displayObject.updateTransform();
       displayObject.parent = cacheParent;
-      // displayObject.hitArea = //TODO add a temp hit area
     }
 
     context.save();

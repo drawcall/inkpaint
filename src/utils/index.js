@@ -84,6 +84,9 @@ export function rgb2hsl(r, g, b) {
     h /= 6;
   }
 
+  h *= 360;
+  s *= 100;
+  l *= 100;
   return [h, s, l];
 }
 

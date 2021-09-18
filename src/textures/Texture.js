@@ -102,9 +102,11 @@ export default class Texture extends EventEmitter {
   openCutout(r, g, b) {
     this.cutout = true;
     this.cutoutColors = { r, g, b };
+    this.setCutoutToBaseTexture();
   }
 
   setCutoutToBaseTexture() {
+    if (!this.baseTexture) return;
     this.baseTexture.cutout = this.cutout;
     this.baseTexture.cutoutColors = this.cutoutColors;
   }

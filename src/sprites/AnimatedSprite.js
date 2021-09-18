@@ -1,12 +1,13 @@
 import Sprite from "./Sprite";
 import { shared } from "../ticker";
+import Maths from "../math/Maths";
 import Texture from "../textures/Texture";
 import { UPDATE_PRIORITY } from "../const";
-import Maths from "../math/Maths";
 
 export default class AnimatedSprite extends Sprite {
   constructor(textures, autoUpdate) {
     super(textures[0] instanceof Texture ? textures[0] : textures[0].texture);
+
     this._textures = null;
     this._durations = null;
     this.textures = textures;
@@ -22,9 +23,7 @@ export default class AnimatedSprite extends Sprite {
   }
 
   stop() {
-    if (!this.playing) {
-      return;
-    }
+    if (!this.playing) return;
 
     this.playing = false;
     if (this._autoUpdate) {

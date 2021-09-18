@@ -28,6 +28,8 @@ export default class Texture extends EventEmitter {
     this.valid = false;
     this.destroyed = false;
     this.requiresUpdate = false;
+    this.cutout = false;
+    this.cutoutColors = null;
 
     this.trim = trim;
     this.orig = orig || frame;
@@ -54,6 +56,7 @@ export default class Texture extends EventEmitter {
     if (baseTexture instanceof Texture) baseTexture = baseTexture.baseTexture;
 
     this.baseTexture = baseTexture;
+    this.setCutoutToBaseTexture();
     this.addToCache(baseTexture.imageUrl);
 
     if (baseTexture.hasLoaded) {
@@ -89,10 +92,21 @@ export default class Texture extends EventEmitter {
     if (useCache) {
       this.addToCache(imageUrl);
       this.baseTexture = BaseTexture.fromImage(imageUrl);
+      this.setCutoutToBaseTexture();
       this.baseTexture.adaptedNodeCanvas();
     } else {
       this.baseTexture.updateSource(imageUrl);
     }
+  }
+
+  openCutout(r, g, b) {
+    this.cutout = true;
+    this.cutoutColors = { r, g, b };
+  }
+
+  setCutoutToBaseTexture() {
+    this.baseTexture.cutout = this.cutout;
+    this.baseTexture.cutoutColors = this.cutoutColors;
   }
 
   getImageUrl() {
@@ -160,6 +174,8 @@ export default class Texture extends EventEmitter {
     this.trim = null;
     this.orig = null;
     this.valid = false;
+    this.cutout = false;
+    this.cutoutColors = null;
     this.destroyed = true;
 
     removeFromTextureCache(this);

@@ -1,6 +1,6 @@
 {
   "name": "inkpaint",
-  "version": "2.5.1",
+  "version": "2.5.3",
   "description": "InkPaint is a lightweight node.js canvas graphics animation library.",
   "main": "./lib/index.js",
   "license": "MIT",

@@ -38,6 +38,8 @@ export default class BaseTexture extends EventEmitter {
     this.premultipliedAlpha = true;
     this.imageUrl = null;
     this.isPowerOfTwo = false;
+    this.cutout = false;
+    this.cutoutColors = null;
 
     this.mipmap = settings.MIPMAP_TEXTURES;
     this.wrapMode = settings.WRAP_MODE;
@@ -127,9 +129,28 @@ export default class BaseTexture extends EventEmitter {
   }
 
   adaptedNodeCanvas() {
-    const { source } = this;
+    const { source, cutout, cutoutColors } = this;
     if (source && source instanceof PsImage && source.isPsImage) {
       this.source = PsImage.convertToImageData(source);
+
+      if (cutout) {
+        const { r, g, b } = cutoutColors;
+        this.cutoutImageData({ pixel: this.source, r, g, b });
+      }
+    }
+  }
+
+  cutoutImageData({ pixel, r, g, b }) {
+    const { data } = pixel;
+    const length = data.length;
+
+    for (let i = 0; i < length; i += 4) {
+      const red = data[i + 0];
+      const green = data[i + 1];
+      const blue = data[i + 2];
+      if (green > g && red > r && blue < b) {
+        data[i + 3] = 0;
+      }
     }
   }
 
@@ -198,6 +219,8 @@ export default class BaseTexture extends EventEmitter {
     removeFromBaseTextureCache(this);
     this.textureCacheIds = null;
     this.destroyed = true;
+    this.cutout = false;
+    this.cutoutColors = null;
   }
 
   dispose() {

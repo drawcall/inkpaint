@@ -1,5 +1,5 @@
 var app = new InkPaint.Application();
-document.body.appendChild(app.view);
+
 var ctx, canvas;
 var width = app.screen.width;
 var height = app.screen.height;
@@ -27,19 +27,9 @@ ticker.add(function(delta) {
 });
 
 function createCanvas(width, height) {
-    canvas = InkPaint.createCanvas();
+    canvas = InkPaint.createCanvas(width, height);
     canvas.width = width;
     canvas.height = height;
-    $(canvas).css({
-        top: 0,
-        left: 0,
-        width: width,
-        height: height,
-        zIndex: 999,
-        position: "absolute",
-        border: "1px solid #32a1ce"
-    });
-    $("body").append(canvas);
     var ctx = canvas.getContext("2d");
 
     return ctx;
@@ -52,3 +42,5 @@ function drawBall(x) {
     ctx.fillStyle = "rgb(0, 0, 255)";
     ctx.fill();
 }
+
+module.exports = app;

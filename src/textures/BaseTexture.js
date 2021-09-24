@@ -74,6 +74,7 @@ export default class BaseTexture extends EventEmitter {
 
     const firstLoaded = !this.source;
     this.source = source;
+
     // source resources loaded
     const { src, width, height, complete, getContext, network } = source;
     const hasSize = width && height;
@@ -249,14 +250,12 @@ export default class BaseTexture extends EventEmitter {
   }
 
   static fromCanvas(canvas, scaleMode, origin = "canvas") {
-    if (!canvas._pixiId) {
-      canvas._pixiId = `${origin}_${uid()}`;
-    }
+    if (!canvas.__paintId) canvas.__paintId = `${origin}_${uid()}`;
 
-    let baseTexture = BaseTextureCache[canvas._pixiId];
+    let baseTexture = BaseTextureCache[canvas.__paintId];
     if (!baseTexture) {
       baseTexture = new BaseTexture(canvas, scaleMode);
-      addToBaseTextureCache(baseTexture, canvas._pixiId);
+      addToBaseTextureCache(baseTexture, canvas.__paintId);
     }
 
     return baseTexture;

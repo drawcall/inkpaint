@@ -83,6 +83,36 @@
             "entry": "video.js"
         }
     ],
+    "textures": [
+        {
+            "title": "Basic Texture",
+            "entry": "texture.js"
+        },
+        {
+            "title": "Texture Rotate",
+            "entry": "texture-rotate.js"
+        },
+        {
+            "title": "Texture Change",
+            "entry": "texture-orig.js"
+        },
+        {
+            "title": "Canvas Texture",
+            "entry": "texture-canvas.js"
+        },
+        {
+            "title": "Render Texture Basic",
+            "entry": "render-texture-basic.js"
+        },
+        {
+            "title": "Render Texture Advanced",
+            "entry": "render-texture-advanced.js"
+        },
+        {
+            "title": "Gradient Basic",
+            "entry": "gradient-basic.js"
+        }
+    ],
     "graphics": [
         {
             "title": "Simple",
@@ -131,32 +161,6 @@
         {
             "title": "Custom Filter",
             "entry": "custom.js"
-        }
-    ],
-    "textures": [
-        {
-            "title": "Texture",
-            "entry": "texture.js"
-        },
-        {
-            "title": "Texture Rotate",
-            "entry": "texture-rotate.js"
-        },
-        {
-            "title": "Texture orig",
-            "entry": "texture-orig.js"
-        },
-        {
-            "title": "Render Texture Basic",
-            "entry": "render-texture-basic.js"
-        },
-        {
-            "title": "Render Texture Advanced",
-            "entry": "render-texture-advanced.js"
-        },
-        {
-            "title": "Gradient Basic",
-            "entry": "gradient-basic.js"
         }
     ]
 }

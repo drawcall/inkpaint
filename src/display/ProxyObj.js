@@ -22,6 +22,9 @@ export default class ProxyObj extends EventEmitter {
     this.isProxy = true;
   }
 
+  setScaleToInit() {}
+  attr(attrs) {}
+
   replaceFromParent(display) {
     const { parent } = this;
     if (!parent) return;

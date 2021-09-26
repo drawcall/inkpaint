@@ -234,6 +234,11 @@ export default class DisplayObject extends EventEmitter {
     this.initScale.copy(this.scale);
   }
 
+  copyScaleAndInit(scale) {
+    this.scale.copy(scale);
+    this.initScale.copy(scale);
+  }
+
   attr(attrs) {
     const scaleInitX = this.initScale.x;
     const scaleInitY = this.initScale.y;

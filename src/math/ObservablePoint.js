@@ -57,4 +57,9 @@ export default class ObservablePoint {
       this.cb.call(this.scope);
     }
   }
+
+  dot(p) {
+    this.x = this.x * p.x;
+    this.x = this.y * p.y;
+  }
 }

@@ -23,6 +23,7 @@ export default class ProxyObj extends EventEmitter {
   }
 
   setScaleToInit() {}
+  copyScaleAndInit(scale) {}
   attr(attrs) {}
 
   replaceFromParent(display) {

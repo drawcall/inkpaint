@@ -20,4 +20,9 @@ export default class Point {
     this.x = x || 0;
     this.y = y || (y !== 0 ? this.x : 0);
   }
+
+  dot(p) {
+    this.x = this.x * p.x;
+    this.x = this.y * p.y;
+  }
 }

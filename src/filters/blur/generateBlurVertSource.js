@@ -36,14 +36,6 @@ export default function generateVertBlurSource(kernelSize, x)
     for (let i = 0; i < kernelSize; i++)
     {
         let blur = template.replace('%index%', i);
-
-        // value = i;
-
-        // if(i >= halfLength)
-        // {
-        //     value = kernelSize - i - 1;
-        // }
-
         blur = blur.replace('%sampleIndex%', `${i - (halfLength - 1)}.0`);
 
         blurLoop += blur;

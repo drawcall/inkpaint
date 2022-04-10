@@ -12,7 +12,7 @@ export default class Application {
           width: options,
           height: arg2 || settings.RENDER_OPTIONS.height,
           useGL: !!arg4,
-          sharedTicker: !!arg5
+          sharedTicker: !!arg5,
         },
         arg3
       );
@@ -24,7 +24,7 @@ export default class Application {
         sharedTicker: false,
         useGL: false,
         sharedLoader: false,
-        autoRender: false
+        autoRender: false,
       },
       options
     );

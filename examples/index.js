@@ -21,11 +21,11 @@ const polyfill = () => {
     global.document = { body };
 
     const baseUrl = path.join(__dirname);
-    const paths = p => path.join(baseUrl, p);
+    const paths = (p) => path.join(baseUrl, p);
     global.paths = paths;
 };
 
-const processingJson = data => {
+const processingJson = (data) => {
     const json = [];
     for (let key in data) {
         const list = data[key];
@@ -34,7 +34,7 @@ const processingJson = data => {
             json.push({
                 name: key + "::" + item.title,
                 value: item.title,
-                func: demoFunc(`${key}/${item.entry}`)
+                func: demoFunc(`${key}/${item.entry}`),
             });
         }
     }
@@ -42,7 +42,7 @@ const processingJson = data => {
     json.push({
         name: "Clear cache",
         value: "Clear cache",
-        func: removeFiles
+        func: removeFiles,
     });
 
     json.push(new inquirer.Separator());
@@ -50,14 +50,14 @@ const processingJson = data => {
 };
 
 let now;
-const screenshots = name => {
+const screenshots = (name) => {
     name = name.replace(/\//gi, "-");
     const dir = path.join(__dirname, "output", name);
     fs.ensureDir(dir);
     id = setInterval(saveFiles, 1000 / 2, dir);
 };
 
-const saveFiles = dir => {
+const saveFiles = (dir) => {
     if (index >= 20) {
         clearInterval(id);
         index = 0;
@@ -71,7 +71,7 @@ const saveFiles = dir => {
     fs.outputFile(file, buffer);
 };
 
-const demoFunc = name => {
+const demoFunc = (name) => {
     const url = path.join(__dirname, "./source/node/", `${name}`);
 
     return () => {
@@ -81,7 +81,7 @@ const demoFunc = name => {
 };
 
 const choices = processingJson(data);
-const runDemo = answer => {
+const runDemo = (answer) => {
     for (let i = 0; i < choices.length; i++) {
         const choice = choices[i];
         if (choice.value === answer.val) {
@@ -105,13 +105,13 @@ const initCommand = () => {
                 name: "val",
                 choices,
                 pageSize: choices.length,
-                validate: function(answer) {
+                validate: function (answer) {
                     if (answer.length < 1) {
                         return "You must choose at least one topping.";
                     }
                     return true;
-                }
-            }
+                },
+            },
         ])
         .then(runDemo);
 };

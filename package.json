@@ -39,7 +39,7 @@
     "canvas": "^2.8.0",
     "earcut": "^2.1.4",
     "eventemitter3": "^2.0.0",
-    "gl": "^4.9.0",
+    "gl": "^5.0.3",
     "mini-signals": "^1.2.0",
     "parse-uri": "^1.0.3",
     "pixi-gl-core": "^1.1.4",

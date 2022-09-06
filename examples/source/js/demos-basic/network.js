@@ -5,12 +5,12 @@ InkPaint.loader.add(
 );
 InkPaint.loader.add(
     "bg",
-    "https://www.pixijs.com/wp/wp-content/uploads/feature-multiplatform.png",
+    "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
     { crossOrigin: "anonymous" }
 );
 InkPaint.loader.add(
     "ws",
-    "'http://qzonestyle.gtimg.cn/qz-proj/weishi-pc/img/index/logo-l@2x.png'",
+    "http://qzonestyle.gtimg.cn/qz-proj/weishi-pc/img/index/logo-l@2x.png",
     { crossOrigin: "anonymous" }
 );
 InkPaint.loader.load(setup);

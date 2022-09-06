@@ -111,7 +111,7 @@ $(document).ready(function($) {
                 bpc.exampleTitle = $(this).text();
 
                 window.location.hash = page;
-                document.title = bpc.exampleTitle + " - PixiJS Examples";
+                document.title = bpc.exampleTitle + " - InkPaint Web Examples";
 
                 bpc.exampleUrl =
                     "source/js/" +
